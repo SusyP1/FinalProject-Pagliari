@@ -13,13 +13,13 @@ from DogsApp.models import Refugio
 # Create your views here.
 
 def inicioview(request):	
-    return render(request,r"C:\Users\59899\Desktop\Python\FinalProject\DogsApp\templates\temp_app\inicio.html")
+    return render(request,r"temp_app/inicio.html")
 
 def pruebaview(request):	
     return HttpResponse("Hola Susy")		
 
 def pruebaview2(request):	
-    return render(request,r"temp_app\prueba2.html")
+    return render(request,"temp_app/prueba2.html")
    
 
 def adoptado_view(request):	
