@@ -1,0 +1,24 @@
+{% extends "padre/padre.html" %}
+
+{% block title %}
+Adoptantes
+{% endblock title %}
+
+{% block main %}
+
+ {% if candidato2.errors%}
+ <p style="color:red"> Datos incorrectos, favor revisar</p>
+ {%endif%}
+
+ <form action ="/form_adoptante/" method="post">{%csrf_token %}
+    <table>
+        {{candidato2.as_table}}
+    </table>
+
+       <input type = "submit" value="Crear Adoptante">
+
+ <form >
+{% endblock main %}
+{% block centro %}
+Se ha registrado como adoptante <Base></Base>
+{% endblock centro %}

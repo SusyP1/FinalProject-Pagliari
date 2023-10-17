@@ -7,6 +7,7 @@ from DogsApp.forms import form_adoptante
 from DogsApp.models import Adoptante
 from DogsApp.forms import form_refugio
 from DogsApp.models import Refugio
+from DogsApp.forms import formbusqueda_adoptado
 
 
 
@@ -46,7 +47,7 @@ def adoptante_view(request):
        
        if candidato1.is_valid:
            informacion1 = candidato1.cleaned_data
-           postulante1= Adoptado(["ID"],informacion1["apellido"], informacion1["email"])
+           postulante1= Adoptante(informacion1["apellido"], informacion1["email"])
            postulante1.save()	
            return render(request,"temp_app/inicio.html")	
        
@@ -75,11 +76,16 @@ def refugio_view(request):
 # def buscardogview(request):
 #     return render(request,"inicio/buscar_dog.html")
 
-# def buscarview(request):
-#     if request.GET["variable_adoptado"]:
-#         variable_adoptado= request.GET["variable_adoptado"]
-#         listado_adoptados= Adoptado.objects.filter(variable_adoptado__icontains=)
-#         return render(request,"inicio/resultado_busqueda.html",{"Libro":Libro,"editoriales": editoriales})
-#     else:
-#         respuesta = "Debes ingresar un titulo de Libro"
-#         return HttpResponse(respuesta)
+def busquedaview(request):
+   
+    candidato=formbusqueda_adoptado(request.GET)
+              
+    if candidato.is_valid:
+          animal_a_buscar = candidato.cleaned_data.get("animal")
+          animales_encontrados=Adoptado.objects.filter(animal__icontains=animal_a_buscar)
+       	             
+    else:
+        animales_encontrados=Adoptado.objects.all  
+    
+    candidato = formbusqueda_adoptado()
+    return render(request,"temp_app/buscar_dog.html", {"candidato":candidato,"animales_encontrados":animales_encontrados})	

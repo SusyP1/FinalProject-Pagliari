@@ -6,19 +6,20 @@ Crear libro
 
 {% block main %}
 
- {% if variablebiblio.errors%}
+ {% if candidato3.errors%}
  <p style="color:red"> Datos incorrectos, favor revisar</p>
  {%endif%}
 
  <form action ="/form_refugio/" method="POST">{%csrf_token %}
     <table>
-        {{variablebiblio.as_table}}
+        {{candidato3.as_table}}
     </table>
 
-    <input type = "submit" value="Crear Libro">
+    <input type = "submit" value="Crear Refugio">
        
  <form >
+
 {% endblock main %}
 {% block centro %}
-He creado un formulario. ALELUYA! <Base></Base>
+He registrado un Refugio <Base></Base>
 {% endblock centro %}
