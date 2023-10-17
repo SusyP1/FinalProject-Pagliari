@@ -1,0 +1,21 @@
+{% extends "padre/padre.html" %}
+
+{% block title %}
+Buscar libro
+{% endblock title %}
+
+{% block main %}
+
+ {% if editorial %}
+ {% for editoriales in editorial %}
+ <li>{{editorial.nombre}}</li>
+ <li>{{editorial.Libro}}</li>
+ {% endfor %}
+</ul>
+{% endif %}
+ 
+{% endblock main %}
+
+{% block centro %}
+Estamos buscando libros <Base></Base>
+{% endblock centro %}
