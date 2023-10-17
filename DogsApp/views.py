@@ -13,7 +13,7 @@ from DogsApp.models import Refugio
 # Create your views here.
 
 def inicioview(request):	
-    return render(request,r"temp_app/inicio.html")
+    return render(request,"temp_app/inicio.html")
 
 def pruebaview(request):	
     return HttpResponse("Hola Susy")		
@@ -32,11 +32,11 @@ def adoptado_view(request):
            informacion = candidato.cleaned_data
            postulante= Adoptado(informacion["animal"], informacion["nombre"], informacion["edad"])
            postulante.save()	
-           return render(request,"DogsApp/inicio.html")	
+           return render(request,"temp_app/inicio.html")	
        
     else:
        candidato = form_adoptado()     
-       return render(request,"inicio/form_adoptado.html", {"candidato":candidato})	
+       return render(request,"temp_app/form_adoptado.html", {"candidato":candidato})	
 
 def adoptante_view(request):	
     if request.method == "POST":	
@@ -48,11 +48,11 @@ def adoptante_view(request):
            informacion1 = candidato1.cleaned_data
            postulante1= Adoptado(["ID"],informacion1["apellido"], informacion1["email"])
            postulante1.save()	
-           return render(request,"DogsApp/inicio.html")	
+           return render(request,"temp_app/inicio.html")	
        
     else:
        candidato1 = form_adoptante()     
-       return render(request,"inicio/form_adoptante.html", {"candidato1":candidato1})	
+       return render(request,"temp_app/form_adoptante.html", {"candidato1":candidato1})	
    
 def refugio_view(request):	
     if request.method == "POST":	
@@ -64,21 +64,21 @@ def refugio_view(request):
            informacion2 = candidato2.cleaned_data
            postulante2= Refugio(["ID"],informacion2["ciudad"], informacion2["categoria"])
            postulante2.save()	
-           return render(request,"DogsApp/inicio.html")	
+           return render(request,"temp_app/inicio.html")	
        
     else:
        candidato2 = form_refugio()     
-       return render(request,"inicio/form_refugio.html", {"candidato2":candidato2})	
+       return render(request,"temp_app/form_refugio.html", {"candidato2":candidato2})	
 
 
 
-# def buscarlibroview(request):
-#     return render(request,"inicio/buscar_libro.html")
+# def buscardogview(request):
+#     return render(request,"inicio/buscar_dog.html")
 
-# def buscarview (request):
-#     if request.GET["Libro"]:
-#         Libro= request.GET["Libro"]
-#         editoriales= Bibliografia.objects.filter(Libro__icontains=Libros)
+# def buscarview(request):
+#     if request.GET["variable_adoptado"]:
+#         variable_adoptado= request.GET["variable_adoptado"]
+#         listado_adoptados= Adoptado.objects.filter(variable_adoptado__icontains=)
 #         return render(request,"inicio/resultado_busqueda.html",{"Libro":Libro,"editoriales": editoriales})
 #     else:
 #         respuesta = "Debes ingresar un titulo de Libro"

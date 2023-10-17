@@ -10,12 +10,12 @@ Resultado busqueda
  <p style="color:red"> Datos incorrectos, favor revisar</p>
  {%endif%}
 
- <form action ="/busqueda_libro/" method="POST">{%csrf_token %}
+ <form action ="/busqueda_dog/" method="POST">{%csrf_token %}
     <table>
         {{variablebiblio.as_table}}
     </table>
 
-    <input type = "submit" value="Crear Libro">
+    <input type = "submit" value="buscar candidatos">
        
  <form >
 {% endblock main %}
