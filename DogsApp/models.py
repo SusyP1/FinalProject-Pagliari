@@ -6,7 +6,8 @@ from django.db.models import Model
 class Adoptado(models.Model):	
     animal=models.CharField(max_length=15)
     nombre= models.CharField(max_length=15)
-    edad = models.CharField(max_length=2)
+    edad= models.CharField(max_length=2, default=0,blank=True)
+  
     
 class Adoptante(models.Model):	
     apellido=models.CharField(max_length=40)		

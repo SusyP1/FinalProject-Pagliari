@@ -1,0 +1,22 @@
+{% extends "padre/padre.html" %}
+
+
+{% block title %}
+Registro
+{% endblock title %}
+
+{% block main %}
+
+
+
+<form action ="" method="POST">
+{%csrf_token %}
+     {{form.as_p}}
+
+    <input type = "submit" value="Registrate">
+ <form >
+
+{% endblock main %}
+{% block centro %}
+Registro <Base></Base>
+{% endblock centro %}

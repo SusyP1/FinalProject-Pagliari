@@ -1,0 +1,22 @@
+{% extends "padre/padre.html" %}
+
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block main %}
+
+
+
+<form action ="" method="POST">
+{%csrf_token %}
+     {{form.as_p}}
+
+    <input type = "submit" value="Iniciar Sesion">
+ <form >
+
+{% endblock main %}
+{% block centro %}
+Login para acceder <Base></Base>
+{% endblock centro %}

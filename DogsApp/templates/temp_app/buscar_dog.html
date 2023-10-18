@@ -6,18 +6,18 @@ Resultado busqueda
 
 {% block main %}
 
- {% if variablebiblio.errors%}
- <p style="color:red"> Datos incorrectos, favor revisar</p>
- {%endif%}
+{% if variablebiblio.errors%}
+<p style="color:red"> Datos incorrectos, favor revisar</p>
+{%endif%}
 
- <form action ="/busqueda_dog/" method="POST">{%csrf_token %}
+<form action ="">
+{%csrf_token %}
     <table>
-        {{variablebiblio.as_table}}
+        {{candidato}}
     </table>
-
-    <input type = "submit" value="buscar candidatos">
-       
- <form >
+        
+    <input type = "submit" value="buscar animales">
+<form >
 {% endblock main %}
 {% block centro %}
 He creado un formulario. ALELUYA! <Base></Base>
