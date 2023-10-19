@@ -11,7 +11,7 @@ Adoptados
 <p style="color:red"> Datos incorrectos, favor revisar</p>
 {%endif%}
 
-<form action ="" method="post">
+<form action ="" method="post" enctype="multipart/form-data">
 {%csrf_token %}
     <table>
         {{candidato.as_table}}

@@ -26,13 +26,14 @@
             <div class="container">
                 <a class="navbar-brand" href="/">Inicio</a>
                 {% comment %} <a class="navbar-brand" href='/usuario/'>Usuarios</a> {% endcomment %}
-                {% if not request.user.is authenticated %}
+                {% comment %} {% if not request.user.is authenticated %} {% endcomment %}
                 <a class="navbar-brand" href="{% url 'login' %}">Login</a>
                 <a class="navbar-brand" href='/registro/'>Registrarse</a>
-                {% else %}
+                {% comment %} {% else %} {% endcomment %}
                 <a class="navbar-brand" href="#">{{request.user.name }}</a> 
                 <a class="navbar-brand" href='/logout/'>Logout</a> 
-                {% endif %}
+                {% comment %} {% endif %} {% endcomment %}
+
                 {% if request.user.avatar %}
                 <img src="{{request.user.avatar.imagen.url}}" alt ="" height="40px">
                 {% endif %}
@@ -40,6 +41,7 @@
                 <a class="navbar-brand" href='/mascotas/'>Mascotas para adoptar</a>
                 <a class="navbar-brand" href='/adoptante/'>Registro de Adoptantes</a>
                 <a class="navbar-brand" href='/refugio/'>Refugios</a>
+                <a class="navbar-brand" href='/padrino/'>Padrinos</a>
                 {% comment %} <a class="navbar-brand" href='/busqueda/'>Buscar animales</a> {% endcomment %}
                 {% comment %} <a class="navbar-brand" href='/leer/'>Listado animales</a> {% endcomment %}
                 <a class="navbar-brand" href='/editar_perfil/'>Editar Perfil</a>

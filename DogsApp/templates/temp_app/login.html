@@ -8,7 +8,6 @@ Login
 {% block main %}
 
 
-
 <form action ="" method="POST">
 {%csrf_token %}
      {{form.as_p}}
@@ -20,6 +19,10 @@ Login
 {% block centro %}
 Login para acceder <Base></Base>
 {% endblock centro %}
+
 {% block botoncitos %}
+{% comment %} {% if user.avatar %}
+<img src="{{ user.avatar.imagen.url }}" alt="Avatar">
+{% endif %} {% endcomment %}
 
 {% endblock botoncitos %}

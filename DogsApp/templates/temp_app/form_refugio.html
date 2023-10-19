@@ -10,7 +10,8 @@ Crear libro
  <p style="color:red"> Datos incorrectos, favor revisar</p>
  {%endif%}
 
- <form action ="/form_refugio/" method="POST">{%csrf_token %}
+ <form action ="/form_refugio/" method="POST">
+    {%csrf_token %}
     <table>
         {{candidato3.as_table}}
     </table>
@@ -21,7 +22,7 @@ Crear libro
 
 {% endblock main %}
 {% block centro %}
-He registrado un Refugio <Base></Base>
+Registra un refugio para animales <Base></Base>
 {% endblock centro %}
 {% block botoncitos %}
 

@@ -11,7 +11,7 @@ Mascotas
 {{mensaje}}  
 </p>
 {% endif %}
-Mascotas para adoptar <Base></Base>
+A un paso de hacer match con tu media naranja ... <Base></Base>
 
 
 
@@ -20,9 +20,9 @@ Mascotas para adoptar <Base></Base>
 {% endblock centro %}
 </h1>
 {% block main %}
-<li class="list-inline-item"><a href={% url "crear adoptado" %}>Ingresar mascota nueva </a></li>
+<li class="list-inline-item"><a href={% url "crear adoptado"  %}>Ingresar mascota nueva </a></li>
 <li class="list-inline-item"><a href={% url "busqueda adoptado" %}>Buscar mascota  </a></li>
-<li class="list-inline-item"><a href={% url "editar adoptado" %}>Editar mascota  </a></li>
+{% comment %} <li class="list-inline-item"><a href={% url "editar adoptado" adoptado.id %}>Editar mascota  </a></li> {% endcomment %}
 <li class="list-inline-item"><a href={% url "listado animales" %}>Listado mascotas  </a></li>
 {% endblock main %}
 

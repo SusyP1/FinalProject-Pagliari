@@ -8,21 +8,24 @@ class form_adoptado(forms.Form):
    animal = forms.CharField(max_length=15)
    nombre = forms.CharField()
    edad = forms.CharField(max_length=2)
+   foto = forms.ImageField()
+   
      
 class formbusqueda_adoptado(forms.Form):	
    animal = forms.CharField(max_length=15, required=False)
+   
+# class formeditaradoptado(form_adoptado):
     
-                 
+
+                  
     
 class form_adoptante(forms.Form):	
-   	
-   apellido = forms.CharField()
-   email= forms.EmailField
+   apellido = forms.CharField(max_length=40)
+   email= forms.EmailField()
 
 class form_refugio(forms.Form):	
-   
-  ciudad = forms.CharField( )
-  categoria = forms.CharField( ) 
+   ciudad = forms.CharField(max_length=40)
+   categoria = forms.CharField( ) 
   
 class UserCreationFormCustom(UserCreationForm):
    username=forms.TextInput()
@@ -40,7 +43,9 @@ class UserEditForm(UserChangeForm):
    username=forms.TextInput()
    last_name =forms.CharField(label="Apellido")
    first_name =forms.CharField(label="Nombre")
+   link=forms.URLField(required=False)
+   avatar=forms.ImageField(required=False)
    class Meta:
       model = UserModel
-      fields = ["email","last_name","first_name"]
-    
+      fields = ["email","last_name","first_name","link","avatar"]
+      

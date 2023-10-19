@@ -9,10 +9,10 @@ Cambio Password
 <form action ="" method="post">
 {%csrf_token %}
     <table>
-        {{form}}
+        {{form.as_p}}
     </table>
 
-    <input type = "submit" value="Crear postulante">
+    <input type = "submit" value="Cambiar password">
  <form >
 
 {% endblock main %}

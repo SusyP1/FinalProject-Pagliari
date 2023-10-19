@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'DogsApp',
-]
+    'NewApp',
+    
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

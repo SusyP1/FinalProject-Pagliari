@@ -6,7 +6,11 @@ leer
 {% block main %}
 
 {% for a in adoptados %}
-<li>{{a}} </li>
+<li>{{a.nombre}} </li>
+<button>
+<a href ={%url "editar adoptado" adoptado.id %}>Editar mascota    
+<a href ={%url "eliminar adoptado" a.nombre %}>Eliminar mascota
+</button>
 {% endfor %} 
 
 {% endblock main %}

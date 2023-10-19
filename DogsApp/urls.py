@@ -15,9 +15,10 @@ from DogsApp.views import cambiarpassview
 from DogsApp.views import editaradoptadoview
 from DogsApp.views import mascotasview
 from DogsApp.views import usuarioview
+from DogsApp.views import eliminaradoptadoview
 
-from django.conf import settings
-from django.conf.urls.static import static
+# from django.conf import settings
+# from django.conf.urls.static import static
 
 
 
@@ -37,10 +38,11 @@ urlpatterns = [
     path("logout/",LogoutView.as_view(template_name="temp_app/logout.html")),
     path("editar_perfil/",editarview,name="editar perfil"),
     path("cambiar_password/",cambiarpassview.as_view(),name="cambiar password"),
-    path("editar_adoptado/",editaradoptadoview,name="editar adoptado"),
+    path("editar_adoptado/<int:adoptado_id>",editaradoptadoview,name="editar adoptado"),
+     path("eliminar_adoptado/",eliminaradoptadoview,name="eliminar adoptado"),
     
     
         
 ]
    
-urlpatterns= static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+# urlpatterns= static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

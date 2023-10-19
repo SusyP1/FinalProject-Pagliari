@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.template import Template, Context
 from django.http import HttpResponse
 from DogsApp.forms import form_adoptado
@@ -15,6 +15,9 @@ from DogsApp.forms import UserEditForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.views.generic import ListView
+
+# import datetime
 
 
 # Create your views here.
@@ -42,7 +45,7 @@ def adoptado_view(request):
        print(candidato)
        if candidato.is_valid:
            informacion = candidato.cleaned_data
-           postulante= Adoptado(animal=informacion["animal"],nombre=informacion["nombre"],edad=informacion["edad"])
+           postulante= Adoptado(animal=informacion["animal"],nombre=informacion["nombre"],edad=informacion["edad"],foto=informacion["foto"])
            postulante.save()	
            return render(request,"temp_app/inicio.html")	
        
@@ -53,12 +56,10 @@ def adoptado_view(request):
 def adoptante_view(request):	
     if request.method == "POST":	
        candidato1=form_adoptante(request.POST)
-       
        print(candidato1)
-       
        if candidato1.is_valid:
            informacion1 = candidato1.cleaned_data
-           postulante1= Adoptante(informacion1["apellido"], informacion1["email"])
+           postulante1= Adoptante(apellido=informacion1["apellido"], email=informacion1["email"])
            postulante1.save()	
            return render(request,"temp_app/inicio.html")	
        
@@ -74,7 +75,7 @@ def refugio_view(request):
        
        if candidato2.is_valid:
            informacion2 = candidato2.cleaned_data
-           postulante2= Refugio(["ID"],informacion2["ciudad"], informacion2["categoria"])
+           postulante2= Refugio(ciudad = informacion2["ciudad"], categoria=informacion2["categoria"])
            postulante2.save()	
            return render(request,"temp_app/inicio.html")	
        
@@ -142,18 +143,32 @@ def registroview(request):
        return render(request,"temp_app/registro.html", {"form":form})
    
 def editarview(request):
+    
     usuario=request.user
     if request.method == "POST":	
-       
-       form=UserEditForm(request.POST,instance=request.user)
-    
+       form=UserEditForm(request.POST,request.FILES,instance=usuario)
        if form.is_valid():
-            form.save()
-            return render(request,"temp_app/inicio.html")
-    
+        avatar_anterior = Avatar.objects.filter(user=request.user)
+        if (len(avatar_anterior) > 0):
+            avatar_anterior.delete()
+        avatar_nuevo = Avatar(
+                user=request.user, imagen=form.cleaned_data["avatar"])
+        avatar_nuevo.save()
+        form.save()
+        return redirect("inicio")
     else:
-       form = UserEditForm(instance=request.user)     
-    return render(request,"temp_app/editar_perfil.html", {"form":form})
+        form = UserEditForm(instance=usuario)
+
+    return render(request, "temp_app/editar_perfil.html", {"form": form})
+
+     
+           
+    #         form.save()
+    #         return render(request,"temp_app/inicio.html")
+    
+    # else:
+    #    form = UserEditForm(instance=request.user)     
+    # return render(request,"temp_app/editar_perfil.html", {"form":form})
 
 class cambiarpassview(LoginRequiredMixin,PasswordChangeView):
     template_name ="temp_app/cambiarpass.html"
@@ -161,5 +176,12 @@ class cambiarpassview(LoginRequiredMixin,PasswordChangeView):
     
 def editaradoptadoview(request,adoptado_id):
     adoptado_a_editar = Adoptado.objects.get(id=adoptado_id)
-    form = form_adoptado(initial={"animal":adoptado_a_editar.animal,"nombre":adoptado_a_editar.nombre, "edad":adoptado_a_editar.edad})
+    candidato = form_adoptado(initial={"id":adoptado_a_editar.id,"animal":adoptado_a_editar.animal,"nombre":adoptado_a_editar.nombre, "edad":adoptado_a_editar.edad})
     return render(request,"temp_app/editar_adoptado.html", {"form":form})
+
+def eliminaradoptadoview(request,adoptado_nombre):
+    adoptado_a_eliminar = Adoptado.objects.get(nombre=adoptado_nombre)
+    adoptado_a_eliminar.delete()
+    adoptado_a_eliminar = Adoptado.objects.all()
+    contexto= {"adoptado a eliminar":adoptado_a_eliminar}
+    return render(request,"temp_app/leer.html", contexto)
