@@ -1,0 +1,31 @@
+{% extends "padre/padre.html" %}
+
+{% block title %}
+Mascotas 
+{% endblock title %}</h1>
+
+
+{% block centro %}
+{% if mensaje %}
+<p>
+{{mensaje}}  
+</p>
+{% endif %}
+Mascotas para adoptar <Base></Base>
+
+
+
+
+
+{% endblock centro %}
+</h1>
+{% block main %}
+<li class="list-inline-item"><a href={% url "crear adoptado" %}>Ingresar mascota nueva </a></li>
+<li class="list-inline-item"><a href={% url "busqueda adoptado" %}>Buscar mascota  </a></li>
+<li class="list-inline-item"><a href={% url "editar adoptado" %}>Editar mascota  </a></li>
+<li class="list-inline-item"><a href={% url "listado animales" %}>Listado mascotas  </a></li>
+{% endblock main %}
+
+{% block botoncitos %}
+
+{% endblock botoncitos %}

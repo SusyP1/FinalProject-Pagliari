@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import  UserCreationForm,UserModel
+from django.contrib.auth.forms import  UserCreationForm,UserModel,UserChangeForm
 
 # from django.forms import Form
 # from django.forms import ModelForm
@@ -33,5 +33,14 @@ class UserCreationFormCustom(UserCreationForm):
       model = UserModel
       fields = ["username","email","password1","password2"]
       help_texts = {k:"" for k in fields}
-      
-   
+
+class UserEditForm(UserChangeForm):
+   password = None
+   email=forms.EmailField(label="Ingrese su mail")
+   username=forms.TextInput()
+   last_name =forms.CharField(label="Apellido")
+   first_name =forms.CharField(label="Nombre")
+   class Meta:
+      model = UserModel
+      fields = ["email","last_name","first_name"]
+    

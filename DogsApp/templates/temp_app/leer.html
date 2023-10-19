@@ -3,11 +3,17 @@
 {% block title %}
 leer
 {% endblock title %}</h1>
+{% block main %}
 
-
-{% block centro %}
 {% for a in adoptados %}
 <li>{{a}} </li>
-{% endfor %}
-{% {% endblock %} centro %}
-</h1>
+{% endfor %} 
+
+{% endblock main %}
+{% block centro %}
+Listado animales<Base></Base>
+{% endblock centro %}
+
+{% block botoncitos %}
+
+{% endblock botoncitos %}

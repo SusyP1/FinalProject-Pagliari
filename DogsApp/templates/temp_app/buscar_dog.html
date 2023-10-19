@@ -6,7 +6,7 @@ Resultado busqueda
 
 {% block main %}
 
-{% if variablebiblio.errors%}
+{% if candidato.errors%}
 <p style="color:red"> Datos incorrectos, favor revisar</p>
 {%endif%}
 
@@ -15,10 +15,22 @@ Resultado busqueda
     <table>
         {{candidato}}
     </table>
-        
     <input type = "submit" value="buscar animales">
 <form >
+{% if animales_encontrados%}
+<ul>
+    {% for animal in animales_encontrados %}
+    <li>{{animal.nombre}} </li>
+    {% endfor %}
+<ul>
+{% else %}
+<p> No hay ningún animal de ese tipo disponible para adopción </p>
+{% endif %}
+
 {% endblock main %}
 {% block centro %}
-He creado un formulario. ALELUYA! <Base></Base>
-{% endblock centro %}
+Ingrese que animal quiere buscar para adoptar <Base></Base>
+{%endblock centro %}
+{% block botoncitos %}
+
+{% endblock botoncitos %}

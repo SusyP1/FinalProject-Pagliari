@@ -11,7 +11,10 @@ from DogsApp.forms import formbusqueda_adoptado
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,authenticate
 from DogsApp.forms import UserCreationFormCustom
-
+from DogsApp.forms import UserEditForm
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -19,8 +22,15 @@ from DogsApp.forms import UserCreationFormCustom
 def inicioview(request):	
     return render(request,"temp_app/inicio.html")
 
-# def pruebaview(request):	
-#     return HttpResponse("Hola Susy")		
+def mascotasview(request):	
+    return render(request,"temp_app/mascotas.html")
+
+def usuarioview(request):	
+    return render(request,"temp_app/usuario.html")
+
+
+def aboutmeview(request):	
+    return HttpResponse("Me llamo Susana Pagliari, tengo 41 años , 2 hijos y muchas mascotas caballos, burros, perros , gatos , ovejas , patos y gansos. Esta es la primera vez que hago un curso de algo relacionado con programación , me ha resultado más dificil de lo que pensaba, pero me gusta mucho, si bien no toco nada de esto en mi trabajo(soy contadora), estoy segura que no va a ser el ultimo curso que haga")		
 
 # def pruebaview2(request):	
 #     return render(request,"temp_app/prueba2.html")
@@ -78,11 +88,11 @@ def refugio_view(request):
 #     return render(request,"inicio/buscar_dog.html")
 
 def busquedaview(request):
-   
-    candidato=formbusqueda_adoptado(request.GET)
+    if request.method == "GET":
+        candidato=formbusqueda_adoptado(request.GET)
               
-    if candidato.is_valid:
-          animal_a_buscar = candidato.get("animal")
+        if candidato.is_valid():
+          animal_a_buscar = candidato.cleaned_data.get("animal")
           animales_encontrados=Adoptado.objects.filter(animal__icontains=animal_a_buscar)
        	             
     else:
@@ -92,19 +102,19 @@ def busquedaview(request):
     return render(request,"temp_app/buscar_dog.html", {"candidato":candidato,"animales_encontrados":animales_encontrados})	
 
 def leerview(request):
-    adoptados=Adoptado.all()
+    adoptados=Adoptado.objects.all()
     contexto={"adoptados":adoptados}
     return render(request,"temp_app/leer.html", contexto)	
 
 def loginview(request):
     if request.method == "POST":	
-       form=AuthenticationForm(request,data = request.POST)
+       form=AuthenticationForm(request,data=request.POST)
        
              
-       if form.is_valid:
+       if form.is_valid():
           usuario = form.cleaned_data.get("username")
           contraseña= form.cleaned_data.get("password")
-          email=form.cleaned_data.get("email")
+          email= form.cleaned_data.get("email")
           
           user=authenticate(username=usuario,password=contraseña,email=email)
           login(request,user)
@@ -121,8 +131,8 @@ def registroview(request):
        
        form=UserCreationFormCustom(request.POST)
     
-       if form.is_valid:
-            username = form.cleaned_data("username")
+       if form.is_valid():
+            username = form.cleaned_data["username"]
             form.save()
             return render(request,"temp_app/inicio.html", {"mensaje":"Usuario Creado"})
     
@@ -130,3 +140,26 @@ def registroview(request):
     else:
        form = UserCreationFormCustom()     
        return render(request,"temp_app/registro.html", {"form":form})
+   
+def editarview(request):
+    usuario=request.user
+    if request.method == "POST":	
+       
+       form=UserEditForm(request.POST,instance=request.user)
+    
+       if form.is_valid():
+            form.save()
+            return render(request,"temp_app/inicio.html")
+    
+    else:
+       form = UserEditForm(instance=request.user)     
+    return render(request,"temp_app/editar_perfil.html", {"form":form})
+
+class cambiarpassview(LoginRequiredMixin,PasswordChangeView):
+    template_name ="temp_app/cambiarpass.html"
+    success_url = reverse_lazy("editar perfil")
+    
+def editaradoptadoview(request,adoptado_id):
+    adoptado_a_editar = Adoptado.objects.get(id=adoptado_id)
+    form = form_adoptado(initial={"animal":adoptado_a_editar.animal,"nombre":adoptado_a_editar.nombre, "edad":adoptado_a_editar.edad})
+    return render(request,"temp_app/editar_adoptado.html", {"form":form})

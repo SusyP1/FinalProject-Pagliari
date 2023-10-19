@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models import Model
+from django.contrib.auth.models import User
+
 
 
 # Create your models here.
@@ -16,4 +18,10 @@ class Adoptante(models.Model):
 class Refugio(models.Model):	
     ciudad=models.CharField(max_length=40)		
     categoria=models.CharField(max_length=40)
+    
+class Avatar(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to="avatares", null=True, blank=True)
+    def __str__(self):
+        return f"{self.user}-{self.imagen}"
  

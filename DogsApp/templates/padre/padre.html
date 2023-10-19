@@ -25,14 +25,26 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="/">Inicio</a>
-                <a class="navbar-brand" href="login/">Login</a>
+                {% comment %} <a class="navbar-brand" href='/usuario/'>Usuarios</a> {% endcomment %}
+                {% if not request.user.is authenticated %}
+                <a class="navbar-brand" href="{% url 'login' %}">Login</a>
                 <a class="navbar-brand" href='/registro/'>Registrarse</a>
-                <a class="navbar-brand" href='/logout/'>Logout</a>
-                <a class="navbar-brand" href='/adoptado/'>Mascotas para adoptar</a>
+                {% else %}
+                <a class="navbar-brand" href="#">{{request.user.name }}</a> 
+                <a class="navbar-brand" href='/logout/'>Logout</a> 
+                {% endif %}
+                {% if request.user.avatar %}
+                <img src="{{request.user.avatar.imagen.url}}" alt ="" height="40px">
+                {% endif %}
+
+                <a class="navbar-brand" href='/mascotas/'>Mascotas para adoptar</a>
                 <a class="navbar-brand" href='/adoptante/'>Registro de Adoptantes</a>
                 <a class="navbar-brand" href='/refugio/'>Refugios</a>
-                <a class="navbar-brand" href='/busqueda/'>Buscar animales</a>
-                <a class="navbar-brand" href='/leer/'>Listado animales</a>
+                {% comment %} <a class="navbar-brand" href='/busqueda/'>Buscar animales</a> {% endcomment %}
+                {% comment %} <a class="navbar-brand" href='/leer/'>Listado animales</a> {% endcomment %}
+                <a class="navbar-brand" href='/editar_perfil/'>Editar Perfil</a>
+                {% comment %} <a class="navbar-brand" href='/cambiar_password/'>Cambiar Contraseña</a> {% endcomment %}
+                
                 
 
                 {% comment %} <a class="btn btn-primary" href="#signup">Sign Up</a> {% endcomment %}
@@ -58,7 +70,7 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            {% comment %} <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
                                 <!-- Email address input-->
                                 <div class="row">
                                     <div class="col">
@@ -84,7 +96,7 @@
                                 <!-- This is what your users will see when there is-->
                                 <!-- an error submitting the form-->
                                 <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            </form>
+                            </form> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -222,6 +234,7 @@
             </div>
         </section> {% endcomment %} 
         {% comment %} <!-- Footer--> {% endcomment %} 
+        {% block botoncitos %}
         <footer class="footer bg-light">
             <div class="container">
                 <div class="row">
@@ -253,6 +266,7 @@
                 </div>
             </div>
         </footer>
+        {% endblock botoncitos %}
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
