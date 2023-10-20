@@ -57,6 +57,7 @@ def adoptado_view(request):
 def adoptante_view(request):	
     if request.method == "POST":	
        candidato1=form_adoptante(request.POST)
+       
        print(candidato1)
        if candidato1.is_valid:
            informacion1 = candidato1.cleaned_data
@@ -204,17 +205,15 @@ def editaradoptadoview(request,adoptado_id):
     # candidato = form_adoptado(initial={"id":adoptado_a_editar.id,"animal":adoptado_a_editar.animal,"nombre":adoptado_a_editar.nombre, "edad":adoptado_a_editar.edad})
     # return render(request,"temp_app/editar_adoptado.html", {"form":form_adoptado})
 
-
-
-
-
-
-def eliminaradoptadoview(request,adoptado_nombre):
-    adoptado_a_eliminar = Adoptado.objects.get(nombre=adoptado_nombre)
+def eliminaradoptadoview(request, adoptado_nombre):
+    adoptado_a_eliminar = Adoptado.objects.get(id=adoptado_nombre)
     adoptado_a_eliminar.delete()
-    adoptado_a_eliminar = Adoptado.objects.all()
-    contexto= {"adoptado a eliminar":adoptado_a_eliminar}
-    return render(request,"temp_app/leer.html", contexto)
+    contexto = {"adoptado a eliminar": adoptado_a_eliminar}
+    return render(request, "temp_app/leer.html", contexto)
+
+
+
+
 
 def detalledoptadoview(request,adoptado_id):
     adoptado = Adoptado.objects.get(id=adoptado_id)

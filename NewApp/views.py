@@ -9,20 +9,20 @@ from django.urls import reverse_lazy
 # Create your views here.
 class PadrinoCreateView(CreateView):
     model = Padrino
-    template_nPadrinome = "temp_NApp/crear_padrino.html"
+    template_name = "temp_NApp/crear_padrino.html"
     fields =["apodo","ahijado","descripcion","fecha_inicio"]
-    success_url = reverse_lazy("padrino")
+    success_url = reverse_lazy("listar padrino")
 
 class PadrinoDetailView(DetailView):
     model = Padrino
     template_name = "temp_NApp/detail_padrino.html"
-    success_url = reverse_lazy("padrino")
+    success_url = reverse_lazy("listar padrino")
     
 class PadrinoUpdateView(UpdateView):
     model = Padrino
     template_name = "temp_NApp/update_padrino.html"
     fields =["apodo","ahijado","descripcion","fecha_inicio"]
-    success_url = reverse_lazy("padrino")
+    success_url = reverse_lazy("listar padrino")
     
 class PadrinoListView(ListView):
     model = Padrino

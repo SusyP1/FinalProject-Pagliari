@@ -16,6 +16,7 @@ from DogsApp.views import editaradoptadoview
 from DogsApp.views import mascotasview
 from DogsApp.views import usuarioview
 from DogsApp.views import eliminaradoptadoview
+from DogsApp.views import detalledoptadoview
 
 # from django.conf import settings
 # from django.conf.urls.static import static
@@ -40,7 +41,7 @@ urlpatterns = [
     path("cambiar_password/",cambiarpassview.as_view(),name="cambiar password"),
     path("mascotas/editar_adoptado/<int:adoptado_id>",editaradoptadoview,name="editar adoptado"),
     path("eliminar_adoptado/<int:adoptado_nombre>",eliminaradoptadoview,name="eliminar adoptado"),
-    path("detalle_adoptado/",eliminaradoptadoview,name="detalle adoptado"),
+    path("detalle_adoptado/<int:adoptado_id>",detalledoptadoview,name="detalle adoptado"),
            
 ]
    
