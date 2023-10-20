@@ -5,11 +5,12 @@ leer
 {% endblock title %}</h1>
 {% block main %}
 
+
 {% for a in adoptados %}
 <li>{{a.nombre}} </li>
 <button>
-<a href ={%url "editar adoptado" adoptado.id %}>Editar mascota    
-<a href ={%url "eliminar adoptado" a.nombre %}>Eliminar mascota
+||<a href ={%url "editar adoptado" a.id %}>Editar mascota </a>||
+{% comment %} <a href ={%url "eliminar adoptado" a.id %}>Eliminar mascota {% endcomment %}
 </button>
 {% endfor %} 
 

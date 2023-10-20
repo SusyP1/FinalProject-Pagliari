@@ -38,7 +38,7 @@ urlpatterns = [
     path("logout/",LogoutView.as_view(template_name="temp_app/logout.html")),
     path("editar_perfil/",editarview,name="editar perfil"),
     path("cambiar_password/",cambiarpassview.as_view(),name="cambiar password"),
-    path("editar_adoptado/<int:adoptado_id>",editaradoptadoview,name="editar adoptado"),
+    path("mascotas/editar_adoptado/<int:adoptado_id>",editaradoptadoview,name="editar adoptado"),
      path("eliminar_adoptado/",eliminaradoptadoview,name="eliminar adoptado"),
     
     

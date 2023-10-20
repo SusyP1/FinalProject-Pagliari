@@ -8,7 +8,7 @@ class form_adoptado(forms.Form):
    animal = forms.CharField(max_length=15)
    nombre = forms.CharField()
    edad = forms.CharField(max_length=2)
-   foto = forms.ImageField()
+   foto = forms.ImageField(required=False)
    
      
 class formbusqueda_adoptado(forms.Form):	
@@ -19,9 +19,9 @@ class formbusqueda_adoptado(forms.Form):
 
                   
     
-class form_adoptante(forms.Form):	
-   apellido = forms.CharField(max_length=40)
-   email= forms.EmailField()
+# class form_adoptante(forms.Form):	
+#    apellido = forms.CharField(max_length=40)
+#    email= forms.EmailField()
 
 class form_refugio(forms.Form):	
    ciudad = forms.CharField(max_length=40)

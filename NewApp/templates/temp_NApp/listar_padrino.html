@@ -7,30 +7,30 @@ Padrino
 {% block main %}
 <a class=navbar-brand href={% url "crear padrino" %}> Crear padrino </a>
 
-<form action ="">
+{% comment %} <form action =""> {% endcomment %}
 {% comment %} {%csrf_token %}
   
         {{candidato}}
  
     <input type = "submit" value="buscar ">
 <form > {% endcomment %}
-{% if animales_encontrados%}
+{% if listado_padrinos %}
 <ul>
-    {% for padrinos in listado padrinos %}
+    {% for padrino in listado_padrinos %}
     <li>
-    <a href={% url " detail padrino" padrino.id %}>{{padrino}} </a>||   <a href={% url " update padrino" padrino.id %}>Editar Padrino </a>|| 
-
+    <a href={% url " detail padrino" padrino.id %}>{{padrino}} </a>||<a href={% url " update padrino" padrino.id %}>Editar Padrino </a>|| 
     </li>
     {% endfor %}
 <ul>
 {% else %}
-<p> No se encontraron padrinos</p>
+<p> No se encontraron padrinos|</p>
 {% endif %}
 
 {% endblock main %}
+
 {% block centro %}
 Apadrina una mascota!!!!! <Base></Base>
-{%endblock centro %}
+{% endblock centro %}
 {% block botoncitos %}
 
 {% endblock botoncitos %}

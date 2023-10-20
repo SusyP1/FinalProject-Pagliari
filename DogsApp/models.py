@@ -10,15 +10,15 @@ class Adoptado(models.Model):
     animal=models.CharField(max_length=15)
     nombre= models.CharField(max_length=15)
     edad= models.CharField(max_length=2, default=0,blank=True)
-    foto=models.ImageField()
+    foto=models.ImageField(upload_to="fotos_adoptados", null=True, blank=True)
     
     # def __str__(self) -> str:
     #     return f"{self.animal} {self.nombre}"
       
     
-class Adoptante(models.Model):	
-    apellido=models.CharField(max_length=40)		
-    email = models.EmailField( max_length=20)
+# class Adoptante(models.Model):	
+#     apellido=models.CharField(max_length=40)		
+#     email = models.EmailField( max_length=20)
  
 class Refugio(models.Model):	
     ciudad=models.CharField(max_length=40)		

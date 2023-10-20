@@ -27,6 +27,6 @@ class PadrinoUpdateView(UpdateView):
 class PadrinoListView(ListView):
     model = Padrino
     template_name = "temp_NApp/listar_padrino.html"
-    context_object_name = "listado padrinos"
+    context_object_name = "listado_padrinos"
   
 

@@ -1,0 +1,26 @@
+{% extends "padre/padre.html" %}
+
+
+{% block title %}
+Crear Padrino
+{% endblock title %}
+
+{% block main %}
+
+
+<form action ={% url "crear padrino" padrino.id  %} method="post" >
+{%csrf_token %}
+    <table>
+        {{form}}
+    </table>
+
+    <input type = "submit" value="Crear padrino">
+ <form >
+
+{% endblock main %}
+{% block centro %}
+Registrate como padrino  <Base></Base>
+{% endblock centro %}
+{% block botoncitos %}
+
+{% endblock botoncitos %}

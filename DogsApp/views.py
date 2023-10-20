@@ -3,8 +3,8 @@ from django.template import Template, Context
 from django.http import HttpResponse
 from DogsApp.forms import form_adoptado
 from DogsApp.models import Adoptado
-from DogsApp.forms import form_adoptante
-from DogsApp.models import Adoptante
+# from DogsApp.forms import form_adoptante
+# from DogsApp.models import Adoptante
 from DogsApp.forms import form_refugio
 from DogsApp.models import Refugio
 from DogsApp.forms import formbusqueda_adoptado
@@ -185,3 +185,6 @@ def eliminaradoptadoview(request,adoptado_nombre):
     adoptado_a_eliminar = Adoptado.objects.all()
     contexto= {"adoptado a eliminar":adoptado_a_eliminar}
     return render(request,"temp_app/leer.html", contexto)
+
+def admin(request):	
+    return render(request,"temp_app/admin.html")
