@@ -1,0 +1,27 @@
+{% extends "padre/padre.html" %}
+
+{% block title %}
+Detalles adoptados
+{% endblock title %}</h1>
+
+
+{% block centro %}
+<enctype="multipart/form-data">
+{% comment %} {% if mensaje %}
+<p>
+{{mensaje}}  
+</p>
+{% endif %} {% endcomment %}
+Detalles adoptados con id {{adoptados.id}} <Base></Base>
+{% endblock centro %}
+</h1>
+{% block main %}
+
+<li> Nombre:{{adoptado.nombre}}</li>
+<li> Edad:{{adoptado.edad}}</li>
+<li> Foto:{{adoptado.foto}}</li>
+{% endblock main %}
+
+{% block botoncitos %}
+
+{% endblock botoncitos %}

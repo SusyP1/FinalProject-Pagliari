@@ -10,11 +10,12 @@ editar Adoptados
 {% if candidato.errors%}
 <p style="color:red"> Datos incorrectos, favor revisar</p>
 {%endif%}
+{% comment %} action ="{% url "editar adoptado" candidato.id  %} " {% endcomment %}
 
-<form action ="{% url "editar adoptado" candidato.id  %} " method="post" enctype="multipart/form-data">
+<form  method="post" enctype="multipart/form-data">
 {%csrf_token %}
     <table>
-        {{candidato.as_table}}
+        {{form.as_table}}
     </table>
 
     <input type = "submit" value="Editar">

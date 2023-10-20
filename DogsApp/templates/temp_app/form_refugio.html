@@ -6,14 +6,14 @@ Crear libro
 
 {% block main %}
 
- {% if candidato3.errors%}
+ {% if candidato2.errors%}
  <p style="color:red"> Datos incorrectos, favor revisar</p>
  {%endif%}
 
- <form action ="/form_refugio/" method="POST">
+ <form action ="" method="POST">
     {%csrf_token %}
     <table>
-        {{candidato3.as_table}}
+        {{candidato2.as_table}}
     </table>
 
     <input type = "submit" value="Crear Refugio">

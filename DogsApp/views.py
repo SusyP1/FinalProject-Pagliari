@@ -174,8 +174,40 @@ class cambiarpassview(LoginRequiredMixin,PasswordChangeView):
     
 def editaradoptadoview(request,adoptado_id):
     adoptado_a_editar = Adoptado.objects.get(id=adoptado_id)
-    candidato = form_adoptado(initial={"id":adoptado_a_editar.id,"animal":adoptado_a_editar.animal,"nombre":adoptado_a_editar.nombre, "edad":adoptado_a_editar.edad})
-    return render(request,"temp_app/editar_adoptado.html", {"form":form_adoptado})
+    if request.method == "POST":
+        form = form_adoptado(request.POST, request.FILES)
+        if form.is_valid():
+          
+            adoptado_a_editar.animal = form.cleaned_data['animal']
+            adoptado_a_editar.nombre = form.cleaned_data['nombre']
+            adoptado_a_editar.edad = form.cleaned_data['edad']
+            adoptado_a_editar.foto = form.cleaned_data.get('foto')
+            adoptado_a_editar.save()
+
+            return redirect("inicio")
+    else:
+      
+        form = form_adoptado(initial={
+            'animal': adoptado_a_editar.animal,
+            'nombre': adoptado_a_editar.nombre,
+            'edad': adoptado_a_editar.edad,
+        })
+
+    return render(request, "temp_app/editar_adoptado.html", {"form": form, "adoptado_id": adoptado_id})
+
+
+    
+    
+    
+    
+    
+    # candidato = form_adoptado(initial={"id":adoptado_a_editar.id,"animal":adoptado_a_editar.animal,"nombre":adoptado_a_editar.nombre, "edad":adoptado_a_editar.edad})
+    # return render(request,"temp_app/editar_adoptado.html", {"form":form_adoptado})
+
+
+
+
+
 
 def eliminaradoptadoview(request,adoptado_nombre):
     adoptado_a_eliminar = Adoptado.objects.get(nombre=adoptado_nombre)
@@ -183,6 +215,12 @@ def eliminaradoptadoview(request,adoptado_nombre):
     adoptado_a_eliminar = Adoptado.objects.all()
     contexto= {"adoptado a eliminar":adoptado_a_eliminar}
     return render(request,"temp_app/leer.html", contexto)
+
+def detalledoptadoview(request,adoptado_id):
+    adoptado = Adoptado.objects.get(id=adoptado_id)
+    return render(request,"temp_app/detalle_adoptado.html", {"adoptado":adoptado})
+
+
 
 def admin(request):	
     return render(request,"temp_app/admin.html")

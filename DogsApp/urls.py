@@ -39,10 +39,9 @@ urlpatterns = [
     path("editar_perfil/",editarview,name="editar perfil"),
     path("cambiar_password/",cambiarpassview.as_view(),name="cambiar password"),
     path("mascotas/editar_adoptado/<int:adoptado_id>",editaradoptadoview,name="editar adoptado"),
-     path("eliminar_adoptado/",eliminaradoptadoview,name="eliminar adoptado"),
-    
-    
-        
+    path("eliminar_adoptado/<int:adoptado_nombre>",eliminaradoptadoview,name="eliminar adoptado"),
+    path("detalle_adoptado/",eliminaradoptadoview,name="detalle adoptado"),
+           
 ]
    
 # urlpatterns= static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
