@@ -8,6 +8,34 @@ editar Padrino
 {% block main %}
 
 
+<form action ="{% url 'update padrino' padrino.id  %}" method="post" >
+{%csrf_token %}
+    <table>
+        {{form}}
+    </table>
+
+    <input type = "submit" value="editar padrino">
+ <form >
+
+{% endblock main %}
+{% block centro %}
+Ediata datos de un  padrino  <Base></Base>
+{% endblock centro %}
+{% block botoncitos %}
+
+{% endblock botoncitos %}
+
+
+{% comment %} {% extends "padre/padre.html" %}
+
+
+{% block title %}
+editar Padrino
+{% endblock title %}
+
+{% block main %}
+
+
 <form action ={% url "editar padrino" padrino.id  %} method="post" >
 {%csrf_token %}
     <table>
@@ -23,4 +51,4 @@ Ediata datos de un  padrino  <Base></Base>
 {% endblock centro %}
 {% block botoncitos %}
 
-{% endblock botoncitos %}
+{% endblock botoncitos %} {% endcomment %}
