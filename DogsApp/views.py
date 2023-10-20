@@ -3,8 +3,8 @@ from django.template import Template, Context
 from django.http import HttpResponse
 from DogsApp.forms import form_adoptado
 from DogsApp.models import Adoptado
-# from DogsApp.forms import form_adoptante
-# from DogsApp.models import Adoptante
+from DogsApp.forms import form_adoptante
+from DogsApp.models import Adoptante
 from DogsApp.forms import form_refugio
 from DogsApp.models import Refugio
 from DogsApp.forms import formbusqueda_adoptado
@@ -16,6 +16,7 @@ from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView
+from DogsApp.models import Avatar
 
 
 
@@ -128,19 +129,17 @@ def loginview(request):
        return render(request,"temp_app/login.html", {"form":form})	
    
 def registroview(request):
-    if request.method == "POST":	
+    if request.method == "POST" :	
        
        form=UserCreationFormCustom(request.POST)
-    
        if form.is_valid():
             username = form.cleaned_data["username"]
             form.save()
-            return render(request,"temp_app/inicio.html", {"mensaje":"Usuario Creado"})
-    
-          
+            return render(request,"temp_app/inicio.html", {"mensaje":"Usuario Creado"})   
     else:
-       form = UserCreationFormCustom()     
-       return render(request,"temp_app/registro.html", {"form":form})
+       form = UserCreationFormCustom()    
+        
+    return render(request,"temp_app/registro.html", {"form":form})
    
 def editarview(request):
     
@@ -151,8 +150,7 @@ def editarview(request):
         avatar_anterior = Avatar.objects.filter(user=request.user)
         if (len(avatar_anterior) > 0):
             avatar_anterior.delete()
-        avatar_nuevo = Avatar(
-                user=request.user, imagen=form.cleaned_data["avatar"])
+        avatar_nuevo = Avatar(user=request.user, imagen=form.cleaned_data["avatar"])
         avatar_nuevo.save()
         form.save()
         return redirect("inicio")
@@ -177,7 +175,7 @@ class cambiarpassview(LoginRequiredMixin,PasswordChangeView):
 def editaradoptadoview(request,adoptado_id):
     adoptado_a_editar = Adoptado.objects.get(id=adoptado_id)
     candidato = form_adoptado(initial={"id":adoptado_a_editar.id,"animal":adoptado_a_editar.animal,"nombre":adoptado_a_editar.nombre, "edad":adoptado_a_editar.edad})
-    return render(request,"temp_app/editar_adoptado.html", {"form":form})
+    return render(request,"temp_app/editar_adoptado.html", {"form":form_adoptado})
 
 def eliminaradoptadoview(request,adoptado_nombre):
     adoptado_a_eliminar = Adoptado.objects.get(nombre=adoptado_nombre)

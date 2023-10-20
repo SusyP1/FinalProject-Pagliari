@@ -14,14 +14,14 @@ class form_adoptado(forms.Form):
 class formbusqueda_adoptado(forms.Form):	
    animal = forms.CharField(max_length=15, required=False)
    
-# class formeditaradoptado(form_adoptado):
+
     
 
                   
     
-# class form_adoptante(forms.Form):	
-#    apellido = forms.CharField(max_length=40)
-#    email= forms.EmailField()
+class form_adoptante(forms.Form):	
+   apellido = forms.CharField(max_length=40)
+   email= forms.EmailField()
 
 class form_refugio(forms.Form):	
    ciudad = forms.CharField(max_length=40)

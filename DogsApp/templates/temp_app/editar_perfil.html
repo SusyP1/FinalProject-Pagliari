@@ -10,17 +10,17 @@ Editar Perfil
 
 <h1> Formulario_Editar Perfil</h1>
 <h1> De {{usuario}}</h1>
-<form action ="" method="post">
+<form action ="" method="post" enctype="multipart/form-data">
 {%csrf_token %}
     <table>
         {{form}}
     </table>
 
-    <input type = "submit" value="Enviar">
+    {% comment %} <input type = "submit" value="Enviar"> {% endcomment %}
  <form >
 
-<button> type="button"
-    <a class="navbar-brand" h ref={% url "cambiar_password"%}>Cambiar Contraseña
+<button> 
+    <a class="navbar-brand" h ref={% url "editar perfil"%}>Editar Perfil
 </button>
 
 {% endblock main %}

@@ -16,9 +16,9 @@ class Adoptado(models.Model):
     #     return f"{self.animal} {self.nombre}"
       
     
-# class Adoptante(models.Model):	
-#     apellido=models.CharField(max_length=40)		
-#     email = models.EmailField( max_length=20)
+class Adoptante(models.Model):	
+    apellido=models.CharField(max_length=40)		
+    email = models.EmailField( max_length=20)
  
 class Refugio(models.Model):	
     ciudad=models.CharField(max_length=40)		
@@ -28,5 +28,5 @@ class Avatar(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to="avatares", null=True, blank=True)
     def __str__(self):
-        return f"{self.user}-{self.imagen}"
+        return f"{self.user} {self.imagen}"
  
