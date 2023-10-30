@@ -17,6 +17,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from DogsApp.models import Avatar
+from django.contrib.auth.decorators import permission_required
+
+
+
 
 
 
@@ -141,7 +145,8 @@ def registroview(request):
        form = UserCreationFormCustom()    
         
     return render(request,"temp_app/registro.html", {"form":form})
-   
+  
+@permission_required('DogsApp.change_avatar')
 def editarview(request):
     
     usuario=request.user
