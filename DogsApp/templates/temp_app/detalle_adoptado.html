@@ -6,7 +6,7 @@ Detalles adoptados
 
 
 {% block centro %}
-<enctype="multipart/form-data">
+
 {% comment %} {% if mensaje %}
 <p>
 {{mensaje}}  
@@ -20,6 +20,7 @@ Detalles adoptados con id {{adoptados.id}} <Base></Base>
 <li> Nombre:{{adoptado.nombre}}</li>
 <li> Edad:{{adoptado.edad}}</li>
 <li> Foto:{{adoptado.foto}}</li>
+
 {% endblock main %}
 
 {% block botoncitos %}
