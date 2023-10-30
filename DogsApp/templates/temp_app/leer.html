@@ -8,6 +8,10 @@ leer
 
 {% for a in adoptados %}
 <li>{{a.nombre}} </li>
+{% if  a.foto %}
+<img src="{{a.foto.url}}" alt="ejemplo">
+{% endif %}
+
 <button>
 ||<a href ={%url "editar adoptado" a.id %}>Editar mascota </a>||
 ||<a href ={%url "detalle adoptado" a.id %}>Ver mas </a>|| 
