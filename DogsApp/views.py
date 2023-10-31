@@ -146,18 +146,21 @@ def registroview(request):
         
     return render(request,"temp_app/registro.html", {"form":form})
   
-@permission_required('DogsApp.change_avatar')
+# @permission_required('DogsApp.change_avatar')
 def editarview(request):
+    
+    
     
     usuario=request.user
     if request.method == "POST":	
        form=UserEditForm(request.POST,request.FILES,instance=usuario)
        if form.is_valid():
-        avatar_anterior = Avatar.objects.filter(user=request.user)
-        if (len(avatar_anterior) > 0):
-            avatar_anterior.delete()
-        avatar_nuevo = Avatar(user=request.user, imagen=form.cleaned_data["avatar"])
-        avatar_nuevo.save()
+        if usuario.has_perm('DogsApp.change_avatar'):
+            avatar_anterior = Avatar.objects.filter(user=request.user)
+            if (len(avatar_anterior) > 0):
+             avatar_anterior.delete()
+            avatar_nuevo = Avatar(user=request.user, imagen=form.cleaned_data["avatar"])
+            avatar_nuevo.save()
         form.save()
         return redirect("inicio")
     else:
