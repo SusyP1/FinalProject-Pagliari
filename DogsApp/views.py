@@ -38,7 +38,7 @@ def usuarioview(request):
 
 
 def aboutmeview(request):	
-    return HttpResponse("Me llamo Susana Pagliari, tengo 41 años , 2 hijos y muchas mascotas caballos, burros, perros , gatos , ovejas , patos y gansos. Esta es la primera vez que hago un curso de algo relacionado con programación , me ha resultado más dificil de lo que pensaba, pero me gusta mucho, si bien no toco nada de esto en mi trabajo(soy contadora), estoy segura que no va a ser el ultimo curso que haga")		
+    return render(request,"temp_app/about_me.html")		
 
 # def pruebaview2(request):	
 #     return render(request,"temp_app/prueba2.html")
@@ -226,6 +226,10 @@ def eliminaradoptadoview(request, adoptado_nombre):
 def detalledoptadoview(request,adoptado_id):
     adoptado = Adoptado.objects.get(id=adoptado_id)
     return render(request,"temp_app/detalle_adoptado.html", {"adoptado":adoptado})
+
+def detalleusuarioview(request,usuario_id):
+    usuario = Avatar.objects.get(id=usuario_id)
+    return render(request,"temp_app/detalle_usuario.html", {"usuario":usuario})
 
 
 

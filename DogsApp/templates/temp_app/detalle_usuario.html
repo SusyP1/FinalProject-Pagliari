@@ -1,0 +1,32 @@
+{% extends "padre/padre.html" %}
+
+{% block title %}
+Listado Usuarios
+{% endblock title %}</h1>
+
+
+{% block centro %}
+
+{% comment %} {% if mensaje %}
+<p>
+{{mensaje}}  
+</p>
+{% endif %} {% endcomment %}
+Listado Usuarios {{usuarios.id}} <Base></Base>
+{% endblock centro %}
+</h1>
+{% block main %}
+
+<li> Nombre:{{usuario.username}}</li>
+<li> Email:{{usuario.email}}</li>
+<li> Foto:{{usuario.avatar}}</li>
+<img src="{{usuario.foto.url}}" alt="ejemplo">
+<li> Link:{{usuario.link}}</li>
+{% comment %} <li> Foto:{{usuario.descripcion}}</li> {% endcomment %}
+
+
+{% endblock main %}
+
+{% block botoncitos %}
+
+{% endblock botoncitos %}

@@ -45,6 +45,7 @@ class UserEditForm(UserChangeForm):
    first_name =forms.CharField(label="Nombre")
    link=forms.URLField(required=False)
    avatar=forms.ImageField(required=False)
+   # descripcion=forms.TextInput(required=False)
    class Meta:
       model = UserModel
       fields = ["email","last_name","first_name","link","avatar"]
