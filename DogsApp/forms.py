@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import  UserCreationForm,UserModel,UserChangeForm
+from .models import Message
+
 
 # from django.forms import Form
 # from django.forms import ModelForm
@@ -49,4 +51,11 @@ class UserEditForm(UserChangeForm):
    class Meta:
       model = UserModel
       fields = ["email","last_name","first_name","link","avatar"]
+      
+      
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['receiver', 'message']
+
       

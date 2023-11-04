@@ -1,7 +1,7 @@
 {% extends "padre/padre.html" %}
 
 {% block title %}
-Listado Usuarios
+Usuarios
 {% endblock title %}</h1>
 
 
@@ -12,21 +12,35 @@ Listado Usuarios
 {{mensaje}}  
 </p>
 {% endif %} {% endcomment %}
-Listado Usuarios {{usuarios.id}} <Base></Base>
+Panel del Usuario {{usuarios.id}} <Base></Base>
 {% endblock centro %}
 </h1>
 {% block main %}
 
 <li> Nombre:{{usuario.username}}</li>
 <li> Email:{{usuario.email}}</li>
-<li> Foto:{{usuario.avatar}}</li>
-<img src="{{usuario.foto.url}}" alt="ejemplo">
+<li> Imagen:{{usuario.avatar.imagen}}</li>
+<img src="{{usuario.avatar.imagen.url}}" >
 <li> Link:{{usuario.link}}</li>
 {% comment %} <li> Foto:{{usuario.descripcion}}</li> {% endcomment %}
+
+{% if request.user.is_authenticated %}  
+
+<button>
+||<a class="navbar-brand" href={% url "editar perfil"%}{{request.user.name}}>Editar Perfil</a> ||
+
+||<a class="navbar-brand" href={% url "cambiar password"%}>Cambiar Contraseña</a> ||
+
+
+<button>
+{% endif %}
 
 
 {% endblock main %}
 
 {% block botoncitos %}
+
+<a class="navbar-brand" href={% url "send_message"%}>Enviar Mensaje </a> 
+<a class="navbar-brand" href={% url "listado"%}>Mensajes recibidos</a> 
 
 {% endblock botoncitos %}

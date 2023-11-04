@@ -1,0 +1,20 @@
+{% extends "padre/padre.html" %}
+
+{% block title %}
+Mensajeria
+{% endblock title %}
+
+{% block main %}
+<h2>Mensajes</h2>
+<ul>
+  {% for message in messages %}
+    <li>
+      <strong>De:</strong> {{ message.sender.username }}<br>
+      <strong>Para:</strong> {{ message.receiver.username }}<br>
+      <strong>Mensaje:</strong> {{ message.message }}
+    </li>
+  {% empty %}
+    <li>No tienes mensajes.</li>
+  {% endfor %}
+</ul>
+{% endblock main %}

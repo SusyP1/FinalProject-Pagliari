@@ -18,6 +18,10 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView
 from DogsApp.models import Avatar
 from django.contrib.auth.decorators import permission_required
+from django.views.generic.edit import FormView
+from .forms import MessageForm
+from DogsApp.models import Message
+from DogsApp.forms import MessageForm
 
 
 
@@ -227,11 +231,36 @@ def detalledoptadoview(request,adoptado_id):
     adoptado = Adoptado.objects.get(id=adoptado_id)
     return render(request,"temp_app/detalle_adoptado.html", {"adoptado":adoptado})
 
-def detalleusuarioview(request,usuario_id):
-    usuario = Avatar.objects.get(id=usuario_id)
-    return render(request,"temp_app/detalle_usuario.html", {"usuario":usuario})
+def detalleusuarioview(request):
+    return render(request,"temp_app/detalle_usuario.html", {"usuario":request.user})
+
+
+# def detalleusuarioview(request,usuario_id):
+#     usuario = Avatar.objects.get(id=usuario_id)
+#     return render(request,"temp_app/detalle_usuario.html", {"usuario":usuario})
 
 
 
 def admin(request):	
     return render(request,"temp_app/admin.html")
+
+class SendMessageView(FormView):
+    template_name = 'temp_app/send_message.html'
+    form_class = MessageForm
+    success_url = reverse_lazy("listado")
+
+    def form_valid(self, form):
+        message = form.save(commit=False)
+        message.sender = self.request.user
+        message.save()
+        return super().form_valid(form)
+
+
+class MessageListView(ListView):
+    model = Message
+    template_name = 'temp_app/message_list.html'
+    context_object_name = 'messages'
+
+    def get_queryset(self):
+        return Message.objects.filter(sender=self.request.user) | Message.objects.filter(receiver=self.request.user)
+

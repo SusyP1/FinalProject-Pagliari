@@ -32,8 +32,7 @@
                 <img src="{{request.user.avatar.imagen.url}}" alt ="" height="40px">
                 {% endif %}
                 <a class="navbar-brand" href='/logout/'>Logout</a> 
-                <a class="navbar-brand" href={% url "editar perfil"%}{{request.user.name}}>Editar Perfil</a> 
-                <a class="navbar-brand" href='/cambiar_password/'>Cambiar Contraseña</a> 
+            
 
                 {% else %} 
                 <a class="navbar-brand" href='/registro/'>Registrarse</a>
@@ -43,12 +42,13 @@
                 <a class="navbar-brand" href='/refugio/'>Refugios</a>
                 <a class="navbar-brand" href='/padrino/'>Padrinos</a>
                 <a class="navbar-brand" href='/adoptante/'>Registro de Adoptantes</a> 
-                <a class="navbar-brand" href='/detalle usuario/'>Listado de Usuarios</a> 
+                <a class="navbar-brand" href="{% url "detalle usuario" %}">Panel del Usuario</a> 
 
+                {% comment %} <a class="navbar-brand" href='/cambiar_password/'>Cambiar Contraseña</a> 
                 {% comment %} <a class="navbar-brand" href="/admin/">admin</a> {% endcomment %}
                 {% comment %} <a class="navbar-brand" href="#">{{request.user.name }}</a>  {% endcomment %}
                 {% comment %} {% endif %} {% endcomment %}
-               
+                {% comment %} <a class="navbar-brand" href={% url "editar perfil"%}{{request.user.name}}>Editar Perfil</a>  {% endcomment %}
                 {% comment %} <a class="navbar-brand" href='/busqueda/'>Buscar animales</a> {% endcomment %}
                 {% comment %} <a class="navbar-brand" href='/leer/'>Listado animales</a> {% endcomment %}
                  

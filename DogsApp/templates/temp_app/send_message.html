@@ -1,0 +1,14 @@
+{% extends "padre/padre.html" %}
+
+{% block title %}
+Mensajeria
+{% endblock title %}
+
+{% block main %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar mensaje</button>
+</form>
+{% endblock main %}
+
