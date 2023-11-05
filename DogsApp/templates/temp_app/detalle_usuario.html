@@ -22,7 +22,7 @@ Panel del Usuario {{usuarios.id}} <Base></Base>
 <li> Imagen:{{usuario.avatar.imagen}}</li>
 <img src="{{usuario.avatar.imagen.url}}" >
 <li> Link:{{usuario.link}}</li>
-{% comment %} <li> Foto:{{usuario.descripcion}}</li> {% endcomment %}
+<li> Descripción:{{usuario.descripcion}}</li> 
 
 {% if request.user.is_authenticated %}  
 

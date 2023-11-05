@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Model
 from django.contrib.auth.models import User
-# from ckeditor.fields import RichTextField 
+from ckeditor.fields import RichTextField 
 
 
  
@@ -37,5 +37,13 @@ class Message(models.Model):
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    
+class BlogPost(models.Model):
+    blog_title = models.CharField(max_length=200)
+    blog_content = RichTextField()
+    publish_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.blog_title
 
  

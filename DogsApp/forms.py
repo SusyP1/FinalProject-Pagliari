@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import  UserCreationForm,UserModel,UserChangeForm
 from .models import Message
+from .models import BlogPost
 
 
 # from django.forms import Form
@@ -47,7 +48,8 @@ class UserEditForm(UserChangeForm):
    first_name =forms.CharField(label="Nombre")
    link=forms.URLField(required=False)
    avatar=forms.ImageField(required=False)
-   # descripcion=forms.TextInput(required=False)
+   descripcion=forms.TextInput()
+   
    class Meta:
       model = UserModel
       fields = ["email","last_name","first_name","link","avatar"]
@@ -57,5 +59,13 @@ class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
         fields = ['receiver', 'message']
+        
+        
+class BlogPostForm(forms.ModelForm):
+
+    class Meta:
+        model = BlogPost
+        fields = ('blog_title', 'blog_content')
+        exclude = ['published_date']
 
       

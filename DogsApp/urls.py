@@ -21,6 +21,7 @@ from DogsApp.views import detalleusuarioview
 from DogsApp.views import detalleusuarioview
 from DogsApp.views import SendMessageView
 from DogsApp.views import MessageListView
+from DogsApp.views import create_blog_post
 
 
 
@@ -51,6 +52,8 @@ urlpatterns = [
     path("detalle_usuario/",detalleusuarioview,name="detalle usuario"),
     path("mensajes/", SendMessageView.as_view(), name='send_message'),
     path("listado/", MessageListView.as_view() , name = "listado"),
+    path('blogspot', create_blog_post, name="create_blog_post"),
+    
 
     
            

@@ -22,6 +22,9 @@ from django.views.generic.edit import FormView
 from .forms import MessageForm
 from DogsApp.models import Message
 from DogsApp.forms import MessageForm
+from DogsApp.forms import BlogPostForm
+from DogsApp.models import BlogPost
+
 
 
 
@@ -263,4 +266,19 @@ class MessageListView(ListView):
 
     def get_queryset(self):
         return Message.objects.filter(sender=self.request.user) | Message.objects.filter(receiver=self.request.user)
+    
+    
+def create_blog_post(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('New Blog Successfully Added')
+    else:
+        form = BlogPostForm()
+        context = {
+            'form':form
+        }
+
+    return render(request, 'home.html', context)
 
