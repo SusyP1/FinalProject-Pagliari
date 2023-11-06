@@ -11,14 +11,13 @@ Editar Perfil
 <h1> Formulario_Editar Perfil</h1>
 <h1> De {{usuario}}</h1>
 
-<form action ="" method="post" enctype="multipart/form-data">
-{%csrf_token %}
-    <table>
-        {{form}}
-    </table>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ avatar_form.as_p }}
+    <button type="submit">Guardar</button>
+</form>
 
-    {% comment %} <input type = "submit" value="Enviar"> {% endcomment %}
- <form >
 
 <button> 
     <a class="navbar-brand" h ref={% url "editar perfil"%}>Editar Perfil
@@ -31,3 +30,4 @@ Editar Usuario  <Base></Base>
 {% block botoncitos %}
 
 {% endblock botoncitos %}
+

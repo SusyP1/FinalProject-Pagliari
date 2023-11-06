@@ -30,8 +30,12 @@ class Avatar(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to="avatares", null=True, blank=True)
     descripcion = models.TextField(null=True,blank=True)
-    def __str__(self):
+    link = models.URLField(max_length=200)
+    def _str_(self):
         return f"{self.user} {self.imagen}"
+    
+
+
     
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')

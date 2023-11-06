@@ -25,6 +25,7 @@ from DogsApp.views import create_blog_post
 
 
 
+
 # from django.conf import settings
 # from django.conf.urls.static import static
 
