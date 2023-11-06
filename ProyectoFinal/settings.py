@@ -40,9 +40,7 @@ INSTALLED_APPS = [
     'DogsApp',
     'NewApp',
     'ckeditor',
-    
-    
-    ]
+       ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

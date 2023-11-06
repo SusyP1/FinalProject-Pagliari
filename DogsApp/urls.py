@@ -53,7 +53,7 @@ urlpatterns = [
     path("detalle_usuario/",detalleusuarioview,name="detalle usuario"),
     path("mensajes/", SendMessageView.as_view(), name='send_message'),
     path("listado/", MessageListView.as_view() , name = "listado"),
-    path('blogspot', create_blog_post, name="create_blog_post"),
+    path('blogspot/', create_blog_post, name="create_blog_post"),
     
 
     

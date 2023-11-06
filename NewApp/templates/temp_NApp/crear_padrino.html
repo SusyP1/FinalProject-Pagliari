@@ -7,11 +7,12 @@ Crear Padrino
 
 {% block main %}
 
-
+{% load ckeditor %}
 <form action ="{% url "crear padrino" %}" method="post" >
+
 {%csrf_token %}
     <table>
-        {{form}}
+        {{ form.body|ckeditor }}
     </table>
     <input type = "submit" value="Crear padrino">
  <form >

@@ -165,14 +165,26 @@ def editarview(request):
         avatar = Avatar(user=usuario)
 
     if request.method == "POST":
+        
         form=UserEditForm(request.POST,request.FILES,instance=usuario)
         avatar_form=AvatarForm(request.POST,request.FILES,instance=avatar)
         print(avatar_form)
         if form.is_valid() and avatar_form.is_valid():
-            if 'imagen' in request.FILES:  
-                avatar_form.save()
-            form.save()
-            return redirect("inicio")
+         if usuario.has_perm('DogsApp.change_avatar'):
+              if 'avatar' in request.FILES:  # Verificar si se ha cargado un nuevo avatar
+                    avatar_anterior = Avatar.objects.filter(user=request.user)
+                    if (len(avatar_anterior) > 0):
+                        avatar_anterior.delete()
+                    avatar_nuevo = Avatar(user=request.user, imagen=form.cleaned_data["avatar"], texto=form.cleaned_data["texto"])
+                    avatar_nuevo.save()
+                    form.save()
+        return redirect("inicio")
+
+
+            # if 'imagen' in request.FILES:  
+            #     avatar_form.save()
+            # form.save()
+            # return redirect("inicio")
     else:
         form = UserEditForm(instance=usuario)
         avatar_form = AvatarForm(instance=avatar)
@@ -277,5 +289,5 @@ def create_blog_post(request):
             'form':form
         }
 
-    return render(request, 'home.html', context)
+    return render(request, 'inicio.html', context)
 
