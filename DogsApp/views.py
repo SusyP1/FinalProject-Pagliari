@@ -54,7 +54,7 @@ def aboutmeview(request):
 
 def adoptado_view(request):	
     if request.method == "POST":	
-       candidato=form_adoptado(request.POST)
+       candidato=form_adoptado(request.POST,request.FILES)
        print(candidato)
        if candidato.is_valid:
            informacion = candidato.cleaned_data
@@ -156,40 +156,67 @@ def registroview(request):
   
 # @permission_required('DogsApp.change_avatar')
 
-
 def editarview(request):
-    usuario=request.user
+    usuario = request.user
     try:
         avatar = Avatar.objects.get(user=usuario)
     except Avatar.DoesNotExist:
         avatar = Avatar(user=usuario)
 
     if request.method == "POST":
-        
-        form=UserEditForm(request.POST,request.FILES,instance=usuario)
-        avatar_form=AvatarForm(request.POST,request.FILES,instance=avatar)
-        print(avatar_form)
+
+        form = UserEditForm(request.POST, instance=usuario)
+        avatar_form = AvatarForm(request.POST, request.FILES, instance=avatar)
         if form.is_valid() and avatar_form.is_valid():
-         if usuario.has_perm('DogsApp.change_avatar'):
-              if 'avatar' in request.FILES:  # Verificar si se ha cargado un nuevo avatar
-                    avatar_anterior = Avatar.objects.filter(user=request.user)
-                    if (len(avatar_anterior) > 0):
-                        avatar_anterior.delete()
-                    avatar_nuevo = Avatar(user=request.user, imagen=form.cleaned_data["avatar"], texto=form.cleaned_data["texto"])
-                    avatar_nuevo.save()
-                    form.save()
+            if usuario.has_perm('DogsApp.change_avatar'):
+                avatar_anterior = Avatar.objects.filter(user=request.user)
+                if (len(avatar_anterior) > 0):
+                    avatar_anterior.delete()
+                avatar_nuevo = Avatar(
+                    user=request.user, imagen=avatar_form.cleaned_data["imagen"], descripcion=avatar_form.cleaned_data["descripcion"], link=avatar_form.cleaned_data["link"])
+                avatar_nuevo.save()
+                form.save()
         return redirect("inicio")
-
-
-            # if 'imagen' in request.FILES:  
-            #     avatar_form.save()
-            # form.save()
-            # return redirect("inicio")
     else:
         form = UserEditForm(instance=usuario)
         avatar_form = AvatarForm(instance=avatar)
 
-    return render(request, "temp_app/editar_perfil.html",{"form":form, "avatar_form": avatar_form})
+    return render(request, "temp_app/editar_perfil.html", {"form": form, "avatar_form": avatar_form})
+
+
+# def editarview(request):
+#     usuario=request.user
+#     try:
+#         avatar = Avatar.objects.get(user=usuario)
+#     except Avatar.DoesNotExist:
+#         avatar = Avatar(user=usuario)
+
+#     if request.method == "POST":
+        
+#         form=UserEditForm(request.POST,request.FILES,instance=usuario)
+#         avatar_form=AvatarForm(request.POST,request.FILES,instance=avatar)
+#         print(avatar_form)
+#         if form.is_valid() and avatar_form.is_valid():
+#          if usuario.has_perm('DogsApp.change_avatar'):
+#               if 'avatar' in request.FILES:  # Verificar si se ha cargado un nuevo avatar
+#                     avatar_anterior = Avatar.objects.filter(user=request.user)
+#                     if (len(avatar_anterior) > 0):
+#                         avatar_anterior.delete()
+#                     avatar_nuevo = Avatar(user=request.user, imagen=form.cleaned_data["avatar"], texto=form.cleaned_data["texto"],descripcion=avatar_form.cleaned_data["descripcion"], link=avatar_form.cleaned_data["link"])
+#                     avatar_nuevo.save()
+#                     form.save()
+#         return redirect("inicio")
+
+
+#             # if 'imagen' in request.FILES:  
+#             #     avatar_form.save()
+#             # form.save()
+#             # return redirect("inicio")
+#     else:
+#         form = UserEditForm(instance=usuario)
+#         avatar_form = AvatarForm(instance=avatar)
+
+#     return render(request, "temp_app/editar_perfil.html",{"form":form, "avatar_form": avatar_form})
 
 #
 
