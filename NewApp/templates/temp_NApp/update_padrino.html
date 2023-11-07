@@ -10,7 +10,8 @@ editar Padrino
 <form action ="{% url 'update_padrino' padrino.id  %}" method="post" >
     {%csrf_token %}
         <table>
-            {{form}}
+            {{form|safe}}
+            {{form.media}}
         </table>
     
         <input type = "submit" value="editar padrino">

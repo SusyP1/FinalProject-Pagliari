@@ -10,12 +10,15 @@ Detalle Padrino
 
 <li> Apodo:{{padrino.apodo}}</li>
 <li> Ahijado:{{padrino.ahijado}}</li>
-<li> Descripcion:{{padrino.descripcion}}</li>
+<li> Descripcion:{{padrino.descripcion|safe}}</li>
 <li> fecha:{{padrino.fecha_inicio}}</li>
 
 {% endblock main %}
 {% block centro %}
-{{padrino.id}}  <Base></Base>
+<Base>
+{{padrino.id|safe}}    
+
+</Base>
 {% endblock centro %}
 {% block botoncitos %}
 

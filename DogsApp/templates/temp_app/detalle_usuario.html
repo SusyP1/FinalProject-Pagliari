@@ -21,8 +21,8 @@ Panel del Usuario {{usuarios.id}} <Base></Base>
 <li> Email:{{usuario.email}}</li>
 <li> Imagen:{{usuario.avatar.imagen}}</li>
 <img src="{{usuario.avatar.imagen.url}}" >
-<li> Link:{{usuario.link}}</li>
-<li> Descripción:{{usuario.descripcion}}</li> 
+<li> Link:{{usuario.avatar.link}}</li>
+<li> Descripción:{{usuario.avatar.descripcion}}</li> 
 
 {% if request.user.is_authenticated %}  
 

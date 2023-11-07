@@ -31,7 +31,7 @@ class Avatar(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to="avatares", null=True, blank=True)
     descripcion = models.TextField(null=True,blank=True)
-    link = models.URLField(max_length=200)
+    link = models.URLField(max_length=200,null=True,blank=True)
     def _str_(self):
         return f"{self.user} {self.imagen}"
     
