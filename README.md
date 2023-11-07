@@ -1,1 +1,4 @@
 # FinalProject-Pagliari
+Este proyecto se trata sobre una página de adopción de Mascotas. Puedes navegar libremente en ella y ver las mascotas disponibles para adoptar con una foto y una breve descripción. En caso que encuentres una Mascota y no te la puedas quedar, tienes la opción de consultar en  qué ciudad se encuentra un Refugio para el animal que encontraste y también puedes ingresar tu mascota , completando los datos y agregando fotos. En caso de que no puedas adoptar una Mascota, pero sí quieras colaborar con mejorar su vida, puedes registrate como Padrino, encontrarás un montón de personas que ayudan desde el apadrinado. 
+Te invitamos a Registrate como usuario, para poder obtener tus datos y conocernos más-
+Muchas gracias 
